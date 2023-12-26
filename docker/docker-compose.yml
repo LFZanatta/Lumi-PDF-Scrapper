@@ -1,0 +1,29 @@
+version: '3'
+
+services:
+  db:
+    image: postgres:latest
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: lumi
+    ports:
+      - "5432:5432"
+
+
+  pdf-scrapper:
+    build:
+      context: ./src
+    container_name: node-container
+    restart: always
+    depends_on:
+      - db
+    environment:
+      DATABASE_URL: "postgresql://postgres:postgres@lumi-pdf-database:5432/lumi"
+    volumes:
+      - ./src
+    ports:
+      - "9898:9898"
+
+
