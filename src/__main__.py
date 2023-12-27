@@ -1,6 +1,5 @@
 import os
 from dotenv import load_dotenv
-
 from controllers.database import DatabaseController
 from models import ScrapperModel
 
